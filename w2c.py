@@ -10,7 +10,7 @@ from pathlib import Path
 #输入：name qw,qx,qy,qz,tx,ty,tz
 #输出：time tx ty tz qx qy qz qw
 i_path=Path('/media/autolab/disk_3T/caiyingfeng',f'stamped_traj_estimate.txt')
-f=open('/media/autolab/disk_3T/caiyingfeng/localization/out/eval/aachen/front_810_poses.txt')
+f=open('/media/autolab/disk_3T/caiyingfeng/localization/out/eval/aachen/front_left_NVSP_adjust_poses.txt')
 f_dof=list(f)
 f.close
 for i in range(0,len(f_dof)):
@@ -41,10 +41,10 @@ f = open("/media/autolab/disk_3T/caiyingfeng/stamped_traj_estimate.txt","r")#c2w
 
 
 f_dof=list(f)
-f_dof.sort()
+#f_dof.sort()#因为groundtruth是三个相机按序来的，所以不估计值也不sort
 f.close
 #i_path=Path('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/eva',f'stamped_groundtruth.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
-i_path=Path('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_eva',f'stamped_traj_estimate.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
+i_path=Path('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left_adjust',f'stamped_traj_estimate.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
 for i in range(0,len(f_dof)):               
     str_dof=f_dof[i].split(' ',-1)
     with open(i_path, 'a') as f:

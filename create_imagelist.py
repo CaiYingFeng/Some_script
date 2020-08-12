@@ -30,14 +30,14 @@ import os
 # def ground_truth(time_path,name_path):用于生成查询图片的位姿真值groundtruth.txt #
 #**********************************************#
 # ************************第一步**********************
-# import os
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/' 
-# image_name_list=os.listdir(dir_path)
-# image_name_list.sort()
-# filename='/media/autolab/disk_3T/caiyingfeng/query-list.txt'
-# with open(filename,'w') as f:
-#     for i in range(0,len(image_name_list)):
-#         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
+import os
+dir_path = '/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/' 
+image_name_list=os.listdir(dir_path)
+image_name_list.sort()
+filename='/media/autolab/disk_3T/caiyingfeng/query-list.txt'
+with open(filename,'w') as f:
+    for i in range(0,len(image_name_list)):
+        f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
 
 
 # # *************************第二步*******************************

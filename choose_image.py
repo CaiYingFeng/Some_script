@@ -57,8 +57,8 @@ def create_querylist(queryimage_dir):
 
     image_name_list=os.listdir(queryimage_dir)
     image_name_list.sort()
-    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/query-list.txt'
-    with open(filename,'w') as f:
+    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/querylist_front.txt'
+    with open(filename,'a') as f:
         for i in range(0,len(image_name_list)):
             f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
 
@@ -96,11 +96,11 @@ def ground_truth(time_path,name_path):
 
 # #这里传入所要读取文件夹的绝对路径，加引号（引号不能省略！）
                    
-str="front_left"
-#transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+str,"/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_"+str)
-#transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/query_"+str)
+str="front_right"
+transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+str,"/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_"+str)
+transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/query_"+str)
 create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_'+str+'/')
-#ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/F1/'+str+'.txt','/media/autolab/disk_3T/caiyingfeng/darknet/'+str+'.txt')#时间戳位姿,darknet用list
+ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/F1/'+str+'.txt','/media/autolab/disk_3T/caiyingfeng/darknet/'+str+'.txt')#时间戳位姿,darknet用list
 
 
 

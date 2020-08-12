@@ -13,14 +13,15 @@ import numpy as np
 from pyquaternion import Quaternion
 from scipy.spatial.transform import Rotation as R
 import os
-str='front_left'
+str='front'
+#f_dof和im_name所在的txt一定要按行对齐
 f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/F1/'+str+'.txt')#时间戳位姿
 f_dof=list(f)
 f.close
 
 f=open('/media/autolab/disk_3T/caiyingfeng/darknet/'+str+'.txt')#图片名
 im_name=list(f)
-im_name.sort()
+#im_name.sort()
 f.close
 
 i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'images.txt')#要保存的model的images.txt
