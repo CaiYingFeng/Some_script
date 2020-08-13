@@ -40,6 +40,7 @@ with open(filename,'w') as f:
         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
 
 
+
 # # *************************第二步*******************************
 # import os
 # def ground_truth(time_path,name_path):
