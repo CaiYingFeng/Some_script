@@ -27,7 +27,7 @@ conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/"+str+".db")#db�
 cursor = conn.cursor()
 sql = """select * from images"""
 
-cursor.execute(sql)
+cursor.execute(sql) 
 result = cursor.fetchall()#result[i][1]表示id=i的图片的name
 print(len(result))
 # print(len(im_name))
