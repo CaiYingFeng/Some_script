@@ -8,20 +8,38 @@ import os
 #dir_path='/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_left/'
 
 #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_right/'
-#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_front_center/' 
+#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/1_front_center/' 
 #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_front_left/' 
 #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_front_right/'
 
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_right/'
+dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1/'
+
+image_name_list=os.listdir(dir_path)
+image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
+image_path_list.sort()
+filename='/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/front_5to1.txt'
+with open(filename,'w') as f:
+    for i in range(0,len(image_path_list)):
+        f.write(image_path_list[i]+'\n')
+
+
+# #**********************************#
+# # 用于生成colmap定位用imagelist.txt #
+# #**********************************#
+
+# import os
+
+
+# dir_path = '/media/autolab/disk_3T/caiyingfeng/video_image/video3'
 
 # image_name_list=os.listdir(dir_path)
-# image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
-# image_path_list.sort()
-# filename='front_right.txt'
-# with open(filename,'w') as f:
-#     for i in range(0,len(image_path_list)):
-#         f.write(image_path_list[i]+'\n')
 
+# image_name_list.sort()
+# filename='/media/autolab/disk_3T/caiyingfeng/video_image/video3_list.txt'
+
+# with open(filename,'w') as f:
+#     for i in range(0,len(image_name_list)):
+#         f.write(image_name_list[i]+'\n')
 
 
 #**********************************************#
@@ -30,14 +48,14 @@ import os
 # def ground_truth(time_path,name_path):用于生成查询图片的位姿真值groundtruth.txt #
 #**********************************************#
 # ************************第一步**********************
-import os
-dir_path = '/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/' 
-image_name_list=os.listdir(dir_path)
-image_name_list.sort()
-filename='/media/autolab/disk_3T/caiyingfeng/query-list.txt'
-with open(filename,'w') as f:
-    for i in range(0,len(image_name_list)):
-        f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
+# import os
+# dir_path = '/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/' 
+# image_name_list=os.listdir(dir_path)
+# image_name_list.sort()
+# filename='/media/autolab/disk_3T/caiyingfeng/query-list.txt'
+# with open(filename,'w') as f:
+#     for i in range(0,len(image_name_list)):
+#         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
 
 
 

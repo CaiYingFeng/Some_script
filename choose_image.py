@@ -30,12 +30,14 @@
 
 # ************************
 # transferPictures()用于分割建图用图片和查询图片
-# 将文件夹下的不同类别的文件夹中的部分图片转移到另一个文件夹下的相同类别的文件夹下，并删除原文件夹中的相应图片（类似于剪切）
+# 将文件夹下的不同类别的文件夹中的部分图片转移到另一个文件夹下的相同类别的文件夹下，（可选：并删除原文件夹中的相应图片（类似于剪切））
 # create_querylist()用于生成hfnet用的querylist
-# ground_truth()生成查询图片位姿真值
+# ground_truth()生成查询图片位姿真值,rpg直接可以用了
 # ************************
 import cv2
 import os
+import shutil
+
 def transferPictures(dbpath,querypath):#dbpath：原始图片目录，用作建图数据；querypath：提出的
     if(os.path.exists(dbpath) and os.path.exists(querypath)):
 
@@ -44,20 +46,35 @@ def transferPictures(dbpath,querypath):#dbpath：原始图片目录，用作建�
         image_name_list.sort()
 
         for i in range(0,len(image_name_list)):
-            if i%50==0:#每隔50张取出一张作为查询图片
-                img = cv2.imread(dbpath + "/" + image_name_list[i])
-                cv2.imwrite(querypath + "/" + image_name_list[i], img)
-                os.remove(dbpath + "/" + image_name_list[i])
+            if i%5==0:#每隔50张取出一张作为查询图片
+                # img = cv2.imread(dbpath + "/" + image_name_list[i])
+                # cv2.imwrite(querypath + "/" + image_name_list[i], img)
+                # os.remove(dbpath + "/" + image_name_list[i])
+                shutil.copy(dbpath + "/" + image_name_list[i],querypath + "/" + image_name_list[i])
+
+
     else:
         print("路径不存在")
 
                 #print(image_name_list[i])
+def pick_timestamp(fromstamp,endstamp):
+    f=open(fromstamp)#time tx ty tz qx qy qz qw正好是rpg所需
+    f_dof=list(f)
+    f.close
+    for i in range(0,len(f_dof),5):#根据每隔几张取图建图定步长
+        with open(endstamp, 'a') as f:
+            f.write(f_dof[i])
+
+
+    
+
+
 
 def create_querylist(queryimage_dir):
 
     image_name_list=os.listdir(queryimage_dir)
     image_name_list.sort()
-    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/querylist_front.txt'
+    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/query_1_front_center.txt'
     with open(filename,'a') as f:
         for i in range(0,len(image_name_list)):
             f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
@@ -72,7 +89,7 @@ def ground_truth(time_path,name_path):
         im_name.sort()
         f.close()
         i_path='/media/autolab/disk_3T/caiyingfeng/stamped_groundtruth.txt'
-        for i in range(0,len(f_dof),50):#与transferPictures提取频率一致
+        for i in range(0,len(f_dof),20):#与transferPictures提取频率一致
             str_dof=f_dof[i].split(' ',-1)
             str_name=im_name[i].split('/',-1)
             name=str_name[-1]
@@ -81,13 +98,17 @@ def ground_truth(time_path,name_path):
             with open(i_path, 'a') as f:   
                 line=name.strip(".jpg")+' '  
                   
+                # line+=(float(str_dof[1])-368500).__str__()+' '
+                # line+=(float(str_dof[2])-3459000).__str__()+' '
+                # line+=(float(str_dof[3])-15).__str__()+' '
+
                 line+=str_dof[1]+' '
                 line+=str_dof[2]+' '
                 line+=str_dof[3]+' '
                 line+=str_dof[4]+' '
                 line+=str_dof[5]+' '
                 line+=str_dof[6]+' '
-                line+=str_dof[7].strip("\n")+' '                 
+                line+=str_dof[7].strip("\n")               
                 #print(line) 
 
                 f.write(line+'\n')
@@ -96,15 +117,23 @@ def ground_truth(time_path,name_path):
 
 # #这里传入所要读取文件夹的绝对路径，加引号（引号不能省略！）
                    
-str="front_right"
-transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+str,"/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_"+str)
-transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/query_"+str)
-create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_'+str+'/')
-ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/F1/'+str+'.txt','/media/autolab/disk_3T/caiyingfeng/darknet/'+str+'.txt')#时间戳位姿,darknet用list
+str="1_front_center"
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+str,"/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/query_"+str)
+# create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/')
+# ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0711/F1/1_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0711/'+str+'.txt')#时间戳位姿,darknet用list
 
-
-
-
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_left","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# print("left 完成")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_center","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# print("center 完成")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_right","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# print("right 完成")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/0_front_center","/media/autolab/disk_3T/caiyingfeng/mask/query_0_front_center")
+# create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_'+str+'/')
+# ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0808SC/B1/2_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str+'.txt')#时间戳位姿,darknet用list
+#
+pick_timestamp('/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/front_right.txt','/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/front_right_5to1.txt')
 
 
 

@@ -13,40 +13,36 @@ import numpy as np
 from pyquaternion import Quaternion
 from scipy.spatial.transform import Rotation as R
 import os
-str='front'
+str='front_5to1'
 #f_dof和im_name所在的txt一定要按行对齐
-f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/F1/'+str+'.txt')#时间戳位姿
+f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/'+str+'.txt')#时间戳位姿
 f_dof=list(f)
 f.close
 
-f=open('/media/autolab/disk_3T/caiyingfeng/darknet/'+str+'.txt')#图片名
-im_name=list(f)
-#im_name.sort()
-f.close
+# if os.path.exists('/media/autolab/disk_3T/caiyingfeng/map/model/images.txt'):
+#     os.remove('/media/autolab/disk_3T/caiyingfeng/map/model/images.txt')
 
-i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'images.txt')#要保存的model的images.txt
+i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'images1.txt')#要保存的model的images.txt
 conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/"+str+".db")#db文件地址
 cursor = conn.cursor()
 sql = """select * from images"""
 
 cursor.execute(sql)
 result = cursor.fetchall()#result[i][1]表示id=i的图片的name
-# print(len(result))
+print(len(result))
 # print(len(im_name))
 
-for i in range(0,len(result)):       
+for i in range(0,len(result)):       #len(result)
     
-    for j in range(0,len(im_name)):
-        
-        str_name=im_name[j].split('/',-1)
-        name=str_name[-1]
-        name=name.strip("\n")
+    for j in range(0,len(f_dof)):#len(f_dof)
+        str_dof=f_dof[j].split(' ',-1)
+        name=str_dof[0]+'.jpg'
 
-        
+
         if name==result[i][1]:
 
             
-            str_dof=f_dof[j].split(' ',-1)
+            
             with open(i_path, 'a') as f:
 
                 qw = float(str_dof[7])        
@@ -54,9 +50,9 @@ for i in range(0,len(result)):
                 qy = float(str_dof[5])
                 qz = float(str_dof[6])
         
-                tx = float(str_dof[1])
-                ty = float(str_dof[2])
-                tz = float(str_dof[3])
+                tx = float(str_dof[1])-368516
+                ty = float(str_dof[2])-3459036
+                tz = float(str_dof[3])-15
                 #print(qw)
         #         r = Quaternion(qw, qx, qy, qz)
         #         rotation = r.rotation_matrix
@@ -84,11 +80,11 @@ for i in range(0,len(result)):
                 line+=xyz[0][1].__str__()+' '
                 line+=xyz[0][2].__str__()+' '
                 line+="1"+' '
-                line+=name.__str__()+' '
+                line+=name.__str__()
                 
                 
         
                 f.write(line+'\n'+'\n')
-    
-
+            break
+        
 conn.close()
