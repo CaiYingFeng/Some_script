@@ -5,19 +5,22 @@
 # #**********************************#
 
 import os
+str_file='front_left'
 #dir_path='/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_left/'
 
 #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_right/'
 #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/1_front_center/' 
-#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_front_left/' 
-#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_front_right/'
-
-dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1/'
-
+# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/'+str_file+'/' 
+# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_center/'
+# dir_path='/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/datasets/huawei/IMAGE/images/query_0707'
+dir_path = '/media/autolab/disk_4T/cyf/hw/database/3to1/'
 image_name_list=os.listdir(dir_path)
+image_name_list.sort()
 image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
-image_path_list.sort()
-filename='/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/front_5to1.txt'
+# image_path_list.sort()
+# filename='/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str_file+'.txt'
+filename='/media/autolab/disk_4T/cyf/hw/database/3to1.txt'
+# filename='/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/datasets/huawei/IMAGE/images/query_0711.txt'
 with open(filename,'w') as f:
     for i in range(0,len(image_path_list)):
         f.write(image_path_list[i]+'\n')
@@ -30,16 +33,16 @@ with open(filename,'w') as f:
 # import os
 
 
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/video_image/video3'
+# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_right/'
 
 # image_name_list=os.listdir(dir_path)
 
 # image_name_list.sort()
-# filename='/media/autolab/disk_3T/caiyingfeng/video_image/video3_list.txt'
+# filename='/media/autolab/disk_3T/caiyingfeng/huawei/0711/B1/front_right_list2.txt'
 
 # with open(filename,'w') as f:
-#     for i in range(0,len(image_name_list)):
-#         f.write(image_name_list[i]+'\n')
+#     for i in range(2,len(image_name_list),3):
+#         f.write('front_right/'+image_name_list[i]+'\n')
 
 
 #**********************************************#

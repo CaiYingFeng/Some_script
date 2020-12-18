@@ -8,7 +8,7 @@ for i in range(0,len(dof),2):
     f_dof.append(dof[i])
 
 print(len(f_dof))
-conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/front_5to1.db")#db文件地址
+conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/database.db")#db文件地址
 cursor = conn.cursor()
 sql = """select * from images"""
 

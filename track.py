@@ -1,6 +1,6 @@
 
-#用于生成image.txt,最终版，colmap可用
-#输入：激光内插后位姿
+#用于生成image.txt,最终版，colmap可用 w2c
+#输入：激光内插后位姿，c2w
 #darknet使用过的imagelist，crate_imagelist.py产生
 #***************************************************************#
 # images.txt和database里面image顺序不一样时，改变images.txt使用 #
@@ -22,8 +22,12 @@ f.close
 # if os.path.exists('/media/autolab/disk_3T/caiyingfeng/map/model/images.txt'):
 #     os.remove('/media/autolab/disk_3T/caiyingfeng/map/model/images.txt')
 
-i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'images1.txt')#要保存的model的images.txt
-conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/"+str+".db")#db文件地址
+# i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'sfmimages.txt')#要保存的model的images.txt
+i_path=Path('/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/outputs/huawei/sfm_empty',f'sfmimages.txt')
+
+# conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/"+str+".db")#db文件地址
+conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/outputs/huawei/sfm_superpoint+superglue_huawei/database.db")
+
 cursor = conn.cursor()
 sql = """select * from images"""
 
@@ -36,7 +40,7 @@ for i in range(0,len(result)):       #len(result)
     
     for j in range(0,len(f_dof)):#len(f_dof)
         str_dof=f_dof[j].split(' ',-1)
-        name=str_dof[0]+'.jpg'
+        name=str_dof[0]+'.png'
 
 
         if name==result[i][1]:
@@ -49,10 +53,16 @@ for i in range(0,len(result)):       #len(result)
                 qx = float(str_dof[4])
                 qy = float(str_dof[5])
                 qz = float(str_dof[6])
+
+                tx = float(str_dof[1])
+                ty = float(str_dof[2])
+                tz = float(str_dof[3])
+                # tz=0#校正激光位姿
         
-                tx = float(str_dof[1])-368516
-                ty = float(str_dof[2])-3459036
-                tz = float(str_dof[3])-15
+                # tx = float(str_dof[1])-368516
+                # ty = float(str_dof[2])-3459036
+                #tz = float(str_dof[3])-15
+                # tz=0#校正激光位姿
                 #print(qw)
         #         r = Quaternion(qw, qx, qy, qz)
         #         rotation = r.rotation_matrix
@@ -79,6 +89,7 @@ for i in range(0,len(result)):       #len(result)
                 line+=xyz[0][0].__str__()+' '   
                 line+=xyz[0][1].__str__()+' '
                 line+=xyz[0][2].__str__()+' '
+                #line+='0'+' '
                 line+="1"+' '
                 line+=name.__str__()
                 

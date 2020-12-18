@@ -45,8 +45,8 @@ def transferPictures(dbpath,querypath):#dbpath：原始图片目录，用作建�
       
         image_name_list.sort()
 
-        for i in range(0,len(image_name_list)):
-            if i%5==0:#每隔50张取出一张作为查询图片
+        for i in range(0,len(image_name_list),3):
+            # if i%50==0:#每隔50张取出一张作为查询图片
                 # img = cv2.imread(dbpath + "/" + image_name_list[i])
                 # cv2.imwrite(querypath + "/" + image_name_list[i], img)
                 # os.remove(dbpath + "/" + image_name_list[i])
@@ -61,7 +61,7 @@ def pick_timestamp(fromstamp,endstamp):
     f=open(fromstamp)#time tx ty tz qx qy qz qw正好是rpg所需
     f_dof=list(f)
     f.close
-    for i in range(0,len(f_dof),5):#根据每隔几张取图建图定步长
+    for i in range(3,len(f_dof),20):#根据每隔几张取图建图定步长
         with open(endstamp, 'a') as f:
             f.write(f_dof[i])
 
@@ -74,7 +74,7 @@ def create_querylist(queryimage_dir):
 
     image_name_list=os.listdir(queryimage_dir)
     image_name_list.sort()
-    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/query_1_front_center.txt'
+    filename='/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/query_front_center_0711.txt'
     with open(filename,'a') as f:
         for i in range(0,len(image_name_list)):
             f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
@@ -117,23 +117,26 @@ def ground_truth(time_path,name_path):
 
 # #这里传入所要读取文件夹的绝对路径，加引号（引号不能省略！）
                    
-str="1_front_center"
+str="front_center"
 # transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+str,"/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
-# transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/query_"+str)
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/0711/"+str,"/media/autolab/disk_3T/caiyingfeng/mask/0711/query_"+str)
 # create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/')
 # ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0711/F1/1_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0711/'+str+'.txt')#时间戳位姿,darknet用list
 
-# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_left","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_left","/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
 # print("left 完成")
-# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_center","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_center","/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
 # print("center 完成")
-# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_right","/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1")
+# transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_right","/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
 # print("right 完成")
-# transferPictures("/media/autolab/disk_3T/caiyingfeng/mask/0_front_center","/media/autolab/disk_3T/caiyingfeng/mask/query_0_front_center")
-# create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query_'+str+'/')
+strflie=['cam07','cam08']
+for s in strflie:
+
+    transferPictures("/media/autolab/disk_4T/cyf/hw/database/cam06","/media/autolab/disk_4T/cyf/hw/database/3to1")
+# create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query')
 # ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0808SC/B1/2_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str+'.txt')#时间戳位姿,darknet用list
 #
-pick_timestamp('/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/front_right.txt','/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/front_right_5to1.txt')
+# pick_timestamp('/media/autolab/disk_3T/caiyingfeng/6DOF/0711/B1/front_center.txt','/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_center_0711/stamped_groundtruth1.txt')
 
 
 

@@ -1,21 +1,21 @@
 import os
-#f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left/stamped_groundtruth.txt')
-f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left_colmap/stamped_traj_estimate.txt')
+f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/0711/F1/front_center.txt')
+# f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_center_colmap/stamped_traj_estimate.txt')
 groundtruth=list(f)
 groundtruth.sort()
 f.close()
 # print(f_dof[0])
 # print(len(f_dof))
 
-f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left/stamped_groundtruth.txt')
-#f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left_adjust_colmap/stamped_traj_estimate.txt')
+# f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_center_colmap/stamped_groundtruth.txt')
+f=open('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_center_colmap/stamped_traj_estimate.txt')
 estimate=list(f)
 estimate.sort()
 f.close()
 
 # print(im_name[0])
 # print(len(im_name))
-i_path='/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_left_adjust_colmap/stamped_traj_estimate1.txt'
+i_path='/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/front_center_colmap/stamped_groundtruth.txt'
 for i in range(0,len(estimate)):
     estimate_name=estimate[i].split(" ",-1)
     name=estimate_name[0]
