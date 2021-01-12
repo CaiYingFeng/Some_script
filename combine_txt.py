@@ -46,21 +46,21 @@ import os
 #                 fp.write(line)
 
 filelist=['cam03.txt','cam05.txt','cam06.txt','cam07.txt','cam08.txt']
-
+s='database'
 # if os.path.exists('/media/autolab/disk_4T/cyf/hw/camera_pose/query/query_pose_3to1.txt'):
 #     os.remove('/media/autolab/disk_4T/cyf/hw/camera_pose/query/query_pose_3to1.txt')
 
 for file in filelist:
-    with open('/media/autolab/disk_4T/cyf/hw/camera_pose/query/'+file,encoding='utf-8') as f:
+    with open('/media/autolab/disk_4T/cyf/hw/camera_pose/'+s+'/'+file,encoding='utf-8') as f:
         for line in f.readlines():            
 
-            with open('/media/autolab/disk_4T/cyf/hw/camera_pose/query/query_pose_3to1.txt',"a") as fp:
+            with open('/media/autolab/disk_4T/cyf/hw/camera_pose/'+s+'/'+s+'_pose.txt',"a") as fp:
                         
                 fp.write(line)
 
-f=open('/media/autolab/disk_4T/cyf/hw/camera_pose/query/query_pose_3to1.txt')
+f=open('/media/autolab/disk_4T/cyf/hw/camera_pose/'+s+'/'+s+'_pose.txt')
 dof=list(f)
 dof.sort()
 for i in range(0,len(dof)):
-    with open('/media/autolab/disk_4T/cyf/hw/camera_pose/query/query_pose_sorted_3to1.txt',"a") as fp:
+    with open('/media/autolab/disk_4T/cyf/hw/camera_pose/'+s+'/'+s+'_pose_sorted.txt',"a") as fp:
         fp.write(dof[i])

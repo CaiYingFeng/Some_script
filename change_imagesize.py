@@ -33,31 +33,33 @@ if __name__ == "__main__":
     # video_name=['VID_20200905_130904','VID_20200905_130924','VID_20200905_130951','VID_20200905_131022','VID_20200905_131100','VID_20200905_131118',
     #         'VID_20200905_133723','VID_20200905_133959','VID_20200905_134239','VID_20200905_134305','VID_20200905_135453','VID_20200905_135535','VID_20200905_135602','VID_20200905_135859','VID_20200905_153947','VID_20200905_154132','VID_20200905_154810']
     # video_name=['front_center_0808','front_center','front_left','front_right','front_left_0808','front_right_08008']
-    video_name=opt.name
-    print(opt.name)
+    # video_name=opt.name
+    # print(opt.name)
     # for v_n in video_name:
-    v_n=video_name
-    # dir_path_in = '/media/autolab/disk_3T/caiyingfeng/pytorch-NetVlad/data/'+v_n
-    dir_path_in='/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_5to1'
-    dir_path_out='/media/autolab/disk_3T/caiyingfeng/pytorch-NetVlad/data/db'
+    # v_n=['cam03','cam05','cam06','cam07','cam08']
+    v_n=['3to1']
+    for strfile in v_n:
+        # dir_path_in = '/media/autolab/disk_3T/caiyingfeng/pytorch-NetVlad/data/'+v_n
+        dir_path_in='/media/autolab/disk_4T/cyf/hw/database/'+strfile
+        dir_path_out='/media/autolab/disk_4T/cyf/localization/data/aachen/image/'+strfile
 
-    # dir_path_out = '/media/autolab/disk_3T/caiyingfeng/pytorch-NetVlad/data/changed/'+v_n
-    if not os.path.exists(dir_path_out):
-        os.makedirs(dir_path_out)
-    # dir_path_out = '/media/autolab/disk_3T/caiyingfeng/20200905Mobile/Phone1'
-    image_name_list=os.listdir(dir_path_in)
+        # dir_path_out = '/media/autolab/disk_3T/caiyingfeng/pytorch-NetVlad/data/changed/'+v_n
+        if not os.path.exists(dir_path_out):
+            os.makedirs(dir_path_out)
+        # dir_path_out = '/media/autolab/disk_3T/caiyingfeng/20200905Mobile/Phone1'
+        image_name_list=os.listdir(dir_path_in)
 
-    image_path_list=[os.path.join(dir_path_in,image_name)for image_name in image_name_list]
-    image_path_list.sort()
-    
+        image_path_list=[os.path.join(dir_path_in,image_name)for image_name in image_name_list]
+        image_path_list.sort()
+        
 
-    for image_name in image_path_list:
-        # print(image_name)
-        im_name=image_name.split('/')[-1]
-        # print(im_name)
-        width = 960
-        height = 600
-        type = 'jpg'
-    
-        ResizeImage(image_name, dir_path_out+'/'+im_name, width, height, type)
+        for image_name in image_path_list:
+            # print(image_name)
+            im_name=image_name.split('/')[-1]
+            # print(im_name)
+            width = 1920
+            height = 1200
+            type = 'png'
+        
+            ResizeImage(image_name, dir_path_out+'/'+im_name, width, height, type)
 

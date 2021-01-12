@@ -37,21 +37,24 @@ def create_json(input_txt_path,output_josn_path,pose):
     with open(output_josn_path,'w') as file_obj:
         json.dump(data,file_obj)
 
+files=['01','02','03','05','06','07','08','09','10']
+for file in files:
+    f_pose=open('/media/autolab/disk_4T/cyf/SG_PR/SG_PR_DATA/graphs_rn/rest/poses/'+file+'.txt')#pose
+    pose=list(f_pose)
 
-f_pose=open('/media/autolab/disk_4T/cyf/data/poses/00.txt')#pose
-pose=list(f_pose)
+    dir_path = '/media/autolab/disk_4T/cyf/SG_PR/SG_PR_DATA/graphs_rn/rest/'+file+'/keypoints'
+    txt_list=os.listdir(dir_path)
+    txt_list.sort()
 
-dir_path = '/media/autolab/disk_4T/cyf/data/keypoints'
-txt_list=os.listdir(dir_path)
-txt_list.sort()
-
-print(txt_list[1])
-num=0
-for txt_name in txt_list:
-    create_json(dir_path+'/'+txt_name,'/media/autolab/disk_4T/cyf/data/00/'+txt_name.strip('.txt')+'.json',pose[num])
-    num+=1
-
+    # print(txt_list[1])
+    num=0
+    for txt_name in txt_list:
+        if not os.path.exists('/media/autolab/disk_4T/cyf/SG_PR/SG_PR_DATA/graphs_rn/'+file):
+            os.makedirs('/media/autolab/disk_4T/cyf/SG_PR/SG_PR_DATA/graphs_rn/'+file)
+        create_json(dir_path+'/'+txt_name,'/media/autolab/disk_4T/cyf/SG_PR/SG_PR_DATA/graphs_rn/'+file+'/'+txt_name.strip('.txt')+'.json',pose[num])
+        num+=1
 
 
 
-print('1')
+
+    print("finished"+file)

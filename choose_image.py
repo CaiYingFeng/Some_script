@@ -129,10 +129,10 @@ str="front_center"
 # print("center 完成")
 # transferPictures("/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/front_right","/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query")
 # print("right 完成")
-strflie=['cam07','cam08']
+strflie=['cam03','cam05','cam08']
 for s in strflie:
 
-    transferPictures("/media/autolab/disk_4T/cyf/hw/database/cam06","/media/autolab/disk_4T/cyf/hw/database/3to1")
+    transferPictures("/media/autolab/disk_4T/cyf/hw/database/"+s,"/media/autolab/disk_4T/cyf/hw/database/cam358")
 # create_querylist('/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query')
 # ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0808SC/B1/2_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str+'.txt')#时间戳位姿,darknet用list
 #

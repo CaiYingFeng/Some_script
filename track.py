@@ -13,9 +13,9 @@ import numpy as np
 from pyquaternion import Quaternion
 from scipy.spatial.transform import Rotation as R
 import os
-str='front_5to1'
+str='database_pose_sorted'
 #f_dof和im_name所在的txt一定要按行对齐
-f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/0808/B1/'+str+'.txt')#时间戳位姿
+f=open('/media/autolab/disk_4T/cyf/hw/camera_pose/database/'+str+'.txt')#时间戳位姿
 f_dof=list(f)
 f.close
 
@@ -23,10 +23,10 @@ f.close
 #     os.remove('/media/autolab/disk_3T/caiyingfeng/map/model/images.txt')
 
 # i_path=Path('/media/autolab/disk_3T/caiyingfeng/map/model',f'sfmimages.txt')#要保存的model的images.txt
-i_path=Path('/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/outputs/huawei/sfm_empty',f'sfmimages.txt')
+i_path=Path('/media/autolab/disk_4T/cyf/map/model',f'images.txt')
 
 # conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/map/"+str+".db")#db文件地址
-conn = sqlite3.connect("/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/outputs/huawei/sfm_superpoint+superglue_huawei/database.db")
+conn = sqlite3.connect("/media/autolab/disk_4T/cyf/map/3to1.db")
 
 cursor = conn.cursor()
 sql = """select * from images"""

@@ -9,18 +9,17 @@ from pathlib import Path
 #从hfnet的pose里面提取位姿
 #输入：name qw,qx,qy,qz,tx,ty,tz   :c2w
 #输出：time tx ty tz qx qy qz qw   :w2c
-
-if os.path.exists('/media/autolab/disk_3T/caiyingfeng/stamped_traj_estimate.txt'):
-        os.remove('/media/autolab/disk_3T/caiyingfeng/stamped_traj_estimate.txt')
-i_path=Path('/media/autolab/disk_3T/caiyingfeng',f'stamped_traj_estimate.txt')
-f=open('/media/autolab/disk_3T/caiyingfeng/localization/out/eval/aachen/1130_0808_new_poses.txt')
+cam='cam03_0107'
+if os.path.exists('/media/autolab/disk_4T/cyf/evo/'+cam+'/estimate1.txt'):
+        os.remove('/media/autolab/disk_4T/cyf/evo/'+cam+'/estimate1.txt')
+i_path='/media/autolab/disk_4T/cyf/evo/'+cam+'/estimate1.txt'
+f=open('/media/autolab/disk_4T/cyf/evo/'+cam+'/'+cam+'_poses.txt')
 f_dof=list(f)
 f.close
 for i in range(0,len(f_dof)):
-    str_dof=f_dof[i].split(' ',-1)
-             
+    str_dof=f_dof[i].split(' ',-1)             
     with open(i_path, 'a') as f:
-        line=str_dof[0].strip(".jpg")+' '          
+        line=str_dof[0].strip(".png")+' '          
                 
         line+=str_dof[5]+' '
         line+=str_dof[6]+' '
@@ -40,14 +39,14 @@ for i in range(0,len(f_dof)):
 
 
 #f = open("/media/autolab/disk_3T/caiyingfeng/stamped_groundtruth.txt","r")#w2c:time tx ty tz qx qy qz qw 
-f = open("/media/autolab/disk_3T/caiyingfeng/stamped_traj_estimate.txt","r")#w2c:time tx ty tz qx qy qz qw 
+f = open("/media/autolab/disk_4T/cyf/evo/"+cam+"/estimate1.txt","r")#w2c:time tx ty tz qx qy qz qw 
 
 
 f_dof=list(f)
 f_dof.sort()#因为groundtruth是三个相机按序来的，所以不估计值也不sort
 f.close
 #i_path=Path('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/eva',f'stamped_groundtruth.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
-i_path=Path('/media/autolab/disk_3T/caiyingfeng/rpg_trajectory_evaluation/HF_0808',f'stamped_traj_estimate_new.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
+i_path=Path('/media/autolab/disk_4T/cyf/evo/'+cam,f'estimate.txt')#要保存的c2w:time tx ty tz qx qy qz qw 
 for i in range(0,len(f_dof)):               
     str_dof=f_dof[i].split(' ',-1)
     with open(i_path, 'a') as f:
@@ -79,12 +78,12 @@ for i in range(0,len(f_dof)):
         line=str_dof[0]+" "#time
 
         #tx ty tz
-        line+=(xyz[0][0]+368516).__str__()+' '   
-        line+=(xyz[0][1]+3459036).__str__()+' '
-        line+=(xyz[0][2]+15).__str__()+' '
-        # line+=(xyz[0][0]).__str__()+' '   
-        # line+=(xyz[0][1]).__str__()+' '
-        # line+=(xyz[0][2]).__str__()+' '
+        # line+=(xyz[0][0]+368516).__str__()+' '   
+        # line+=(xyz[0][1]+3459036).__str__()+' '
+        # line+=(xyz[0][2]+15).__str__()+' '
+        line+=(xyz[0][0]).__str__()+' '   
+        line+=(xyz[0][1]).__str__()+' '
+        line+=(xyz[0][2]).__str__()+' '
 
 
         #qx qy qz qw

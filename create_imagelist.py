@@ -5,24 +5,26 @@
 # #**********************************#
 
 import os
-str_file='front_left'
-#dir_path='/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_left/'
+# str_file=['db','cam03','cam05','cam06','cam07','cam08']
+# for strfile in str_file:
+# #dir_path='/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_left/'
 
-#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_right/'
-#dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/1_front_center/' 
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/'+str_file+'/' 
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_center/'
-# dir_path='/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/datasets/huawei/IMAGE/images/query_0707'
-dir_path = '/media/autolab/disk_4T/cyf/hw/database/3to1/'
+# #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/0_back_right/'
+# #dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/1_front_center/' 
+# # dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/'+str_file+'/' 
+# # dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_center/'
+# # dir_path='/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/datasets/huawei/IMAGE/images/query_0707'
+strfile='cam03'
+dir_path = '/media/autolab/disk_4T/cyf/hw/database/'+strfile
 image_name_list=os.listdir(dir_path)
 image_name_list.sort()
 image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
-# image_path_list.sort()
+# # image_path_list.sort()
 # filename='/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str_file+'.txt'
-filename='/media/autolab/disk_4T/cyf/hw/database/3to1.txt'
-# filename='/media/autolab/disk_3T/caiyingfeng/localization/Hierarchical-Localization/datasets/huawei/IMAGE/images/query_0711.txt'
+# filename='/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/'+strfile+'.txt'
+filename='/media/autolab/disk_4T/cyf/hw/database/'+strfile+'.txt'
 with open(filename,'w') as f:
-    for i in range(0,len(image_path_list)):
+    for i in range(0,len(image_name_list)):
         f.write(image_path_list[i]+'\n')
 
 
@@ -52,13 +54,13 @@ with open(filename,'w') as f:
 #**********************************************#
 # ************************第一步**********************
 # import os
-# dir_path = '/media/autolab/disk_3T/caiyingfeng/localization/data/aachen/image/query/' 
+# dir_path = "/media/autolab/disk_4T/cyf/localization/data/aachen/image/query"
 # image_name_list=os.listdir(dir_path)
 # image_name_list.sort()
-# filename='/media/autolab/disk_3T/caiyingfeng/query-list.txt'
+# filename="/media/autolab/disk_4T/cyf/localization/data/aachen/cam03.txt"
 # with open(filename,'w') as f:
 #     for i in range(0,len(image_name_list)):
-#         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1200 2304.0 2304.0 960.0 600.0\n')
+#         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1020 1938.34 1937.10 959.5 509.5\n')
 
 
 

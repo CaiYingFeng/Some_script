@@ -2,25 +2,27 @@ import os
 
 #改图片名称
 # dir_path = '/media/autolab/disk_3T/caiyingfeng/mask/0711/front_center'
-dir_path = '/media/autolab/disk_4T/cyf/hw/database/3to1'
-image_name_list=os.listdir(dir_path)
-image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
-image_path_list.sort()
+strfile=['cam03','cam05','cam06','cam07','cam08']
+for s in strfile:
+    dir_path = '/media/autolab/disk_4T/cyf/hw/query/'+s
+    image_name_list=os.listdir(dir_path)
+    image_path_list=[os.path.join(dir_path,image_name)for image_name in image_name_list]
+    image_path_list.sort()
 
-for image_name in image_path_list:
-    # print(image_name)
-    # print(image_name[:(len(image_name)-5)]+image_name[(len(image_name)-4):])
-    # break
-    print(image_name)
-    
-    im_name=image_name[:(len(image_name)-29)]+image_name[(len(image_name)-23):]
-    print(im_name)
-    im_name=im_name[:(len(im_name)-13)]+'.'+im_name[(len(im_name)-13):]
-    print(im_name)
-    im_name=im_name[:(len(im_name)-5)]+im_name[(len(im_name)-4):]
-    print(im_name)
+    for image_name in image_path_list:
+        # print(image_name)
+        # print(image_name[:(len(image_name)-5)]+image_name[(len(image_name)-4):])
+        # break
+        print(image_name)
+        
+        im_name=image_name[:(len(image_name)-29)]+image_name[(len(image_name)-23):]
+        print(im_name)
+        im_name=im_name[:(len(im_name)-13)]+'.'+im_name[(len(im_name)-13):]
+        print(im_name)
+        im_name=im_name[:(len(im_name)-5)]+im_name[(len(im_name)-4):]
+        print(im_name)
 
-    os.rename(image_name,im_name)
+        os.rename(image_name,im_name)
     # break
     # os.rename(image_name,image_name[:(len(image_name)-15)]+image_name[(len(image_name)-8):])
 

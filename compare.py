@@ -1,27 +1,30 @@
-import os
+from sklearn import metrics
+import numpy as np
+import matplotlib.pyplot as plt
+#load result
+
+gt_db_path ='/media/autolab/disk_4T/cyf/SG_PR/eva/00_gt_db.npy'
+pred_db_path = '/media/autolab/disk_4T/cyf/SG_PR/eva/00_DL_db.npy'
+gt_db=np.load(gt_db_path)
+pred_db=np.load(pred_db_path)
 
 
-dir_path = '/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_left/'
-
-image_name_list=os.listdir(dir_path)
-
-image_name_list.sort()
-print(len(image_name_list))
-f=open('/media/autolab/disk_3T/caiyingfeng/6DOF/0711/image_name/front_left.txt')#时间戳位姿
-f_dof=list(f)
-f_dof.sort()
-print(len(f_dof))
-count=0
-for i in range(0,len(f_dof)):
-    name=f_dof[i].split(' ',-1)[0]
-    flag=0
-    for j in range(0,len(image_name_list)):
-        # print(image_name_list[j])
-        if(('front_left/'+image_name_list[j])==name):
-            flag=1
-            break
-    if flag==0:
-        count+=1
-        print(name)
-    # break
-print(count)
+pred_db = np.array(pred_db)
+gt_db = np.array(gt_db)
+#####ROC
+fpr, tpr, roc_thresholds = metrics.roc_curve(gt_db, pred_db)
+roc_auc = metrics.auc(fpr, tpr)
+print("fpr: ", fpr)
+print("tpr: ", tpr)
+print("thresholds: ", roc_thresholds)
+print("roc_auc: ", roc_auc)
+plt.figure(0)
+lw = 2
+plt.plot(fpr, tpr, color='darkorange',
+            lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('DL ROC Curve')
+plt.legend(loc="lower right")
+plt.show()
