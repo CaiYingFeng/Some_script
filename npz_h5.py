@@ -70,9 +70,9 @@ def npz_2_h5(npz_path,h5_path):
 
 if __name__ == "__main__":
 
-    h5_path='/media/autolab/disk_4T/cyf/localization/out/exports/netvlad/aachen/hw_cam03.h5'
-    npz_path='/media/autolab/disk_4T/cyf/localization/out/exports/netvlad/aachen'
+    h5_path='/media/autolab/disk_4T/cyf/localization/out/exports/netvlad/aachen/cam03_db_query.h5'
+    npz_path='/media/autolab/disk_4T/cyf/localization/out/exports/netvlad/aachen/db_query'
     # h5_2_npz(h5_path,npz_path)
-    # npz_2_h5(npz_path,h5_path)
-    global_des=np.load('/media/autolab/disk_4T/cyf/SG_PR/eva/00_DL_db.npy')
-    print("1")
+    npz_2_h5(npz_path,h5_path)
+    # global_des=np.load('/media/autolab/disk_4T/cyf/SG_PR/eva/00_DL_db.npy')
+    # print("1")

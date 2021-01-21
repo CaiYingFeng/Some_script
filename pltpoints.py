@@ -4,7 +4,7 @@ import os
 import sys
 import tty
 import termios
-cam='cam03'
+cam='cam03_sp'
 f=open('/media/autolab/disk_4T/cyf/localization/out/eval/aachen/'+cam+'/'+'cam03.txt')
 gt_dof=list(f)
 f.close
@@ -40,7 +40,7 @@ def plt_points():
 
     
 # for i in range(len(gt_dof)):
-for i in range(190):
+for i in range(357):
 
     ground_x.append(float(gt_dof[i].split(' ',-1)[1]))
     ground_y.append(float(gt_dof[i].split(' ',-1)[2]))

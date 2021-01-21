@@ -94,7 +94,7 @@ def create_emptySfM( posefile , emptySfM_path ,db_path ):
                     line+=xyz[0][1].__str__()+' '
                     line+=xyz[0][2].__str__()+' '
 
-                    line+="1"+' '
+                    line+="1"+' '+'db/'
                     line+=name.__str__()
                         
                     f.write(line+'\n'+'\n')
@@ -175,22 +175,22 @@ def update_database(emptySfM_path , database_path):
     
 
     #更新表cameras
-    cursor.execute('SELECT params FROM cameras WHERE camera_id=?;',
-                    (1,))
-    data = cursor.fetchall()
-    intrinsics = blob_to_array(data[0][0], np.double)
+    # cursor.execute('SELECT params FROM cameras WHERE camera_id=?;',
+    #                 (1,))
+    # data = cursor.fetchall()
+    # intrinsics = blob_to_array(data[0][0], np.double)
 
-    intrinsics[0]=1938.34
-    intrinsics[1]=1937.10
-    intrinsics[2]=959.5
-    intrinsics[3]=509.5
+    # intrinsics[0]=1938.34
+    # intrinsics[1]=1937.10
+    # intrinsics[2]=959.5
+    # intrinsics[3]=509.5
 
 
-    cursor.execute('UPDATE cameras SET params = ?;',
-                    [array_to_blob(intrinsics)])
+    # cursor.execute('UPDATE cameras SET params = ?;',
+    #                 [array_to_blob(intrinsics)])
 
         
-    conn.commit()  #提交，以保存执行结果
+    # conn.commit()  #提交，以保存执行结果
 
 
     conn.close()
@@ -206,7 +206,9 @@ def run_feature_extractor(colmap_path,  image_path, database_path, mask_path='',
             str(colmap_path), 'feature_extractor',
             '--image_path', str(image_path),
             '--database_path', str(database_path),
-            '--ImageReader.camera_model',str(camera_model)         
+            '--ImageReader.camera_model',str(camera_model) ,
+            '--ImageReader.single_camera','1',
+            '--ImageReader.camera_params','1938.34,1937.10,959.5,509.5'
             ]
     else:
         cmd = [
@@ -214,7 +216,9 @@ def run_feature_extractor(colmap_path,  image_path, database_path, mask_path='',
             '--image_path', str(image_path),
             '--ImageReader.mask_path', str(mask_path),
             '--database_path', str(database_path),
-            '--ImageReader.camera_model',str(camera_model)
+            '--ImageReader.camera_model',str(camera_model),
+            '--ImageReader.single_camera','1',
+            '--ImageReader.camera_params','1938.34,1937.10,959.5,509.5'
             ]
 
         
@@ -247,6 +251,28 @@ def run_spatial_matcher(colmap_path,database_path):
         exit(ret)
 
     print('Finished the spatial_matcher...')
+
+def run_sequential_matcher(colmap_path,database_path):
+    print('Running the spatial_matcher...')
+    vocab_tree_path='/media/autolab/disk_3T/caiyingfeng/vocab_tree_flickr100K_words256K.bin'
+    
+    
+    cmd = [
+        str(colmap_path), 'sequential_matcher',
+        '--database_path', str(database_path),
+        '--SequentialMatching.vocab_tree_path', str(vocab_tree_path)
+        
+        ]
+
+        
+    # logging.info(' '.join(cmd))
+    print(cmd)
+    ret = subprocess.call(cmd)
+    if ret != 0:
+        logging.warning('Problem with sequential_matcher, exiting.')
+        exit(ret)
+
+    print('Finished the sequential_matcher...')
 
 def run_triangulation(colmap_path, model_path, database_path, image_path, emptySfM_path):
     if not os.path.exists(model_path):
@@ -298,18 +324,26 @@ def run_BA(colmap_path, model_path, BA_model):
 
 
 if __name__ == "__main__":
+    os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
     
     opts = argparse.ArgumentParser("This script is used to mapping.")
     opts.add_argument("--colmap_path", default='colmap')
-    opts.add_argument("--image_path", default='/media/autolab/disk_4T/cyf/hw/database/cam03')#图片目录：需提供文件
+    # opts.add_argument("--image_path", default='/media/autolab/disk_4T/cyf/hw/database/cam03')#图片目录：需提供文件
     opts.add_argument("--posefile", default='/media/autolab/disk_4T/cyf/hw/camera_pose/database/cam03.txt')#图片位姿：需提供文件
     opts.add_argument("--mask_path", default='/media/autolab/disk_4T/cyf/hw/mask/cam03')#只针对colmap的sift提取特征时图片掩码：可选提供
-    opts.add_argument("--database_path", default='/media/autolab/disk_4T/cyf/map/cam03.db')#生成的数据库文件存放位置
-    opts.add_argument("--emptySfM_path", default='/media/autolab/disk_4T/cyf/map/model')#生成的空SfM存放位置
+    # opts.add_argument("--database_path", default='/media/autolab/disk_4T/cyf/map/cam03.db')#生成的数据库文件存放位置
+    # opts.add_argument("--emptySfM_path", default='/media/autolab/disk_4T/cyf/map/model')#生成的空SfM存放位置
+    # opts.add_argument("--model_path", default='/media/autolab/disk_4T/cyf/map/new_model')#生成的SfM模型
+    # opts.add_argument("--camera_model", default='PINHOLE')#相机模型
+    # opts.add_argument("--BA_model", default='/media/autolab/disk_4T/cyf/map/BA_model')#BA后模型存放
+    
+
+    opts.add_argument("--image_path", default='/media/autolab/disk_4T/cyf/localization/Herarchical-Localization/datasets/huawei/IMAGE/images')#图片目录：需提供文件
+    opts.add_argument("--database_path", default='/media/autolab/disk_4T/cyf/localization/Herarchical-Localization/outputs/cam03.db')#生成的数据库文件存放位置
+    opts.add_argument("--emptySfM_path", default='/media/autolab/disk_4T/cyf/localization/Herarchical-Localization/outputs/huawei/sfm_empty')#生成的空SfM存放位置
     opts.add_argument("--model_path", default='/media/autolab/disk_4T/cyf/map/new_model')#生成的SfM模型
     opts.add_argument("--camera_model", default='PINHOLE')#相机模型
     opts.add_argument("--BA_model", default='/media/autolab/disk_4T/cyf/map/BA_model')#BA后模型存放
-
     opts = opts.parse_args()
 
     colmap_path=opts.colmap_path
@@ -320,19 +354,21 @@ if __name__ == "__main__":
     emptySfM_path=opts.emptySfM_path
     model_path=opts.model_path #output model
     camera_model=opts.camera_model
+    BA_model=opts.BA_model
 
 
-    run_feature_extractor(colmap_path, image_path, database_path, mask_path, camera_model)   
+    # run_feature_extractor(colmap_path, image_path, database_path, mask_path, camera_model)   
 
-    create_emptySfM(posefile , emptySfM_path ,database_path )
+    # create_emptySfM(posefile , emptySfM_path ,database_path )
 
-    update_database(emptySfM_path,database_path)
+    # update_database(emptySfM_path,database_path)
 
-    run_spatial_matcher(colmap_path,database_path)
+    # run_spatial_matcher(colmap_path,database_path)
+    run_sequential_matcher(colmap_path,database_path)
 
-    run_triangulation(colmap_path, model_path, database_path, image_path, emptySfM_path)
+    # run_triangulation(colmap_path, model_path, database_path, image_path, emptySfM_path)
 
-    run_BA(colmap_path, model_path, BA_model)
+    # run_BA(colmap_path, model_path, BA_model)
 
 
     
