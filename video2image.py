@@ -25,6 +25,7 @@ def process_video(i_video, o_video, num):
 if __name__ == '__main__':
     # video_name=['VID_20200905_130904','VID_20200905_130924','VID_20200905_130951','VID_20200905_131022','VID_20200905_131100','VID_20200905_131118',
     #         'VID_20200905_133723','VID_20200905_133959','VID_20200905_134239','VID_20200905_134305','VID_20200905_135453','VID_20200905_135535','VID_20200905_135602','VID_20200905_135859','VID_20200905_153947','VID_20200905_154132','VID_20200905_154810']
+<<<<<<< HEAD
     video_name=['VID_20200808_213555']
 
     for v_n in video_name:
@@ -32,6 +33,15 @@ if __name__ == '__main__':
 
     
         output='/media/autolab/disk_3T/caiyingfeng/huawei/'+v_n+'/'
+=======
+    video_name=['VID_20200905_134305']
+
+    for v_n in video_name:
+        input='/media/autolab/disk_3T/caiyingfeng/20200905Mobile/'+v_n+'.mp4'
+
+    
+        output='/media/autolab/disk_3T/caiyingfeng/20200905Mobile/'+v_n+'/'
+>>>>>>> 781ea4ee083b4ef2a11abdf8509bd86ad16c661b
         if not os.path.exists(output):
             os.makedirs(output)
 

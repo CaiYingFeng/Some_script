@@ -94,8 +94,12 @@ def create_emptySfM( posefile , emptySfM_path ,db_path ):
                     line+=xyz[0][1].__str__()+' '
                     line+=xyz[0][2].__str__()+' '
 
+<<<<<<< HEAD
                     # line+="1"+' '+'db/'
                     line+="1"+' '
+=======
+                    line+="1"+' '+'db/'
+>>>>>>> 781ea4ee083b4ef2a11abdf8509bd86ad16c661b
                     line+=name.__str__()
                         
                     f.write(line+'\n'+'\n')

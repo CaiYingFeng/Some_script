@@ -53,6 +53,7 @@ import os
 # def ground_truth(time_path,name_path):用于生成查询图片的位姿真值groundtruth.txt #
 #**********************************************#
 # ************************第一步**********************
+<<<<<<< HEAD
 import os
 dir_path = "/media/autolab/disk_4T/cyf/localization/data/aachen/image/query"
 image_name_list=os.listdir(dir_path)
@@ -61,6 +62,16 @@ filename="/media/autolab/disk_4T/cyf/localization/data/aachen/cam03.txt"
 with open(filename,'w') as f:
     for i in range(0,len(image_name_list)):
         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1020 1938.34 1937.10 959.5 509.5\n')
+=======
+# import os
+# dir_path = "/media/autolab/disk_4T/cyf/localization/data/aachen/image/query"
+# image_name_list=os.listdir(dir_path)
+# image_name_list.sort()
+# filename="/media/autolab/disk_4T/cyf/localization/data/aachen/cam03.txt"
+# with open(filename,'w') as f:
+#     for i in range(0,len(image_name_list)):
+#         f.write('query/'+image_name_list[i]+' PINHOLE 1920 1020 1938.34 1937.10 959.5 509.5\n')
+>>>>>>> 781ea4ee083b4ef2a11abdf8509bd86ad16c661b
 
 
 
