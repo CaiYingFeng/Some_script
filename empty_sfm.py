@@ -410,9 +410,9 @@ def create_emptySfM_threecam(posefiles, emptySfM_path):
 # base_path='/media/autolab/disk_3T/caiyingfeng/huawei/10to1_gt/'
 # posefiles=[base_path+'fl_08.txt',base_path+'fc_08.txt',base_path+'fr_08.txt',base_path+'fl_07_3to1.txt',base_path+'fc_07_3to1.txt',base_path+'fr_07_3to1.txt']
 
-base_path='/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v10/'
+base_path='/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v12/'
 posefiles=[base_path+'front_center_10to1.txt',base_path+'front_left_10to1.txt',base_path+'front_right_10to1.txt']
-emptySfM_path='/media/autolab/disk_4T/cyf/localization/Herarchical-Localization/outputs/wanguo/sfm_empty_10to1_fusion_v10'
+emptySfM_path='/media/autolab/disk_4T/cyf/localization/Herarchical-Localization/outputs/wanguo/sfm_empty_10to1_fusion_v12'
 # posefile='/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/front_center_5to1.txt'
 # create_emptySfM_multi(image_path,posefiles,emptySfM_path)
 # create_emptySfM(posefile,emptySfM_path)

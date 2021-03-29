@@ -4,11 +4,11 @@ import heapq
 from scipy.spatial.transform import Rotation as R
 # from data_gen.rotation import *
 
-eval_name='v2_321_0808_front_right_50to1_half'
-gt_name='0808_front_right50to1_half_delete2'
+eval_name='0711_front_right_20to1_v12_BA'
+gt_name='0711_front_right_20to1_fusion_v12_delete'
 #评估位移用c2w
 gt_path='/media/autolab/disk_4T/cyf/localization/out/eval/aachen/'+gt_name+'.txt'
-estimate_path='/media/autolab/disk_4T/cyf/localization/out/eval/aachen/'+eval_name+'/poses_c2w_delete2.txt'
+estimate_path='/media/autolab/disk_4T/cyf/localization/out/eval/aachen/'+eval_name+'/poses_c2w.txt'
 
 f=open(gt_path)
 gt=list(f)
@@ -37,7 +37,8 @@ print('median: '+str(np.median(dis)))
 print('max: '+str(np.max(dis)))
 print('min: '+str(np.min(dis)))
 
-distance_thr=[0.1,0.25,0.5,1,2,3,5,10,30,50,100]
+# distance_thr=[0.1,0.25,0.5,1,2,3,5,10,30,50,100]
+distance_thr=[0.5,1]
 for my_dis in distance_thr:
 
     num_1=sum(i < my_dis for i in dis)#小于1m数量
@@ -94,7 +95,8 @@ print('median: '+str(np.median(angle_err)))
 print('max: '+str(np.max(angle_err)))
 print('min: '+str(np.min(angle_err)))
 
-angle_thr=[0.1,0.5,1,2,3,5,10,20,30,50,90]
+# angle_thr=[0.1,0.5,1,2,3,5,10,20,30,50,90]
+angle_thr=[3,5]
 for my_angle in angle_thr:
     num=sum(i < my_angle for i in angle_err)#小于x°数量
     print('<'+str(my_angle)+'°: '+str(num)+'  '+str(100*num/len(gt)))
@@ -121,8 +123,7 @@ if(len(distance_thr)==len(angle_thr)):
     for i in range(len(distance_thr)):
         Thr_tra=distance_thr[i]
         Thr_angle=angle_thr[i]
-        print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
-
+        # print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
 
 Thr_tra=0.5
 Thr_angle=3
@@ -132,10 +133,10 @@ Thr_tra=1
 Thr_angle=5
 print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
 
-Thr_tra=2
-Thr_angle=5
-print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
+# Thr_tra=2
+# Thr_angle=5
+# print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
 
-Thr_tra=2.5
-Thr_angle=5
-print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))
+# Thr_tra=2.5
+# Thr_angle=5
+# print(str(Thr_tra)+'米 '+str(Thr_angle)+'度：'+str(get_percent(r,t,Thr_angle,Thr_tra)))

@@ -29,12 +29,12 @@ import numpy as np
 
         
 # # #query_image gt c2w
-f=open('/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/gt/fusion_8-7/front_center.txt')#time tx ty tz qx qy qz qw正好是rpg所需，真值。要改
+f=open('/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/gt/fusion_v12/front_right.txt')#time tx ty tz qx qy qz qw正好是rpg所需，真值。要改
 f_dof=list(f)
 f.close
 step=20#要改 
-for i in range(19,len(f_dof),step):#根据每隔几张取图建图定步长，可能要改起点
-    with open('/media/autolab/disk_4T/cyf/localization/out/eval/aachen/0711_front_center_20to1_fusion_8-7.txt', 'a') as f:#输出的query的位姿真值c2w。要改
+for i in range(0,len(f_dof),step):#根据每隔几张取图建图定步长，可能要改起点
+    with open('/media/autolab/disk_4T/cyf/localization/out/eval/aachen/0711_front_right_20to1_fusion_v12_original.txt', 'a') as f:#输出的query的位姿真值c2w。要改
         f.write(f_dof[i])
 
 

@@ -139,7 +139,7 @@ for s in strflie:
 # # ground_truth('/media/autolab/disk_3T/caiyingfeng/6DOF/0808SC/B1/2_camera_front_center.txt','/media/autolab/disk_3T/caiyingfeng/darknet/imagelist/0808/'+str+'.txt')#时间戳位姿,darknet用list
 # #
     # transferPictures(3,"/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/"+s,"/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/front_3to1")
-    pick_timestamp(10,'/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v10/'+s+'.txt','/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v10/'+s+'_10to1.txt')
+    pick_timestamp(10,'/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v12/'+s+'.txt','/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v12/'+s+'_10to1.txt')
 
 
 

@@ -1,7 +1,10 @@
-new=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_8-7/front_right_10to1.txt'))
+# new=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/fusion_v12/front_left.txt'))
+# old=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/front_left.txt'))
+# old=old[3230:60015]
 
-old=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0808/B1/gt/front_right_10to1.txt'))
-# old=old[0:13164]
+new=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/gt/fusion_v12/front_right.txt'))
+old=list(open('/media/autolab/disk_3T/caiyingfeng/huawei/0711/F1/gt/front_right.txt'))
+old=old[:13164]
 for i in range(len(new)):
     if old[i].split(' ')[0]!=new[i].split(' ')[0]:
         print(old[i].split(' ')[0])

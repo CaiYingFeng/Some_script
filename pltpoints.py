@@ -73,10 +73,10 @@ for i in range(0,len(gt_dof)):
         dy_ground_y1.append(float(gt_dof[i+1].split()[2])-float(gt_dof[i].split()[2])) 
 # plt.plot(ground_x1, ground_y1, c='b', label="db ground truth")    
     # plt_points()
-# plt.plot(ground_x1, ground_y1, c='b', label="0808")
+plt.plot(ground_x1, ground_y1, c='b', label="0808")
 for i in range(0,len(gt_dof),10):
     plt.arrow(ground_x1[i],ground_y1[i],dx_ground_x1[i],dy_ground_y1[i],width=0.01,head_width=3,fc='blue',ec='black')
-plt.legend()
+# plt.legend()
 # plt.show()  
 
     
@@ -91,7 +91,7 @@ for i in range(len(gt_dof_0711)):
         dx_ground_x_0711.append(float(gt_dof_0711[i+1].split()[1])-float(gt_dof_0711[i].split()[1]))
         dy_ground_y_0711.append(float(gt_dof_0711[i+1].split()[2])-float(gt_dof_0711[i].split()[2]))
 # plt.plot(ground_x_0711, ground_y_0711, c='r', label="query ground truth")
-for i in range(0,len(gt_dof_0711)):
+for i in range(0,len(gt_dof_0711),10):
     plt.arrow(ground_x_0711[i],ground_y_0711[i],dx_ground_x_0711[i],dy_ground_y_0711[i],width=0.001,head_width=2,fc='red',ec='black')
 plt.show()
 
